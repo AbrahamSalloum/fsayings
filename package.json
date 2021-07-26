@@ -10,11 +10,14 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "fs": "^0.0.1-security",
     "native-base": "^3.0.6",
+    "path": "^0.12.7",
     "react": "17.0.1",
     "react-native": "0.64.2",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-svg": "^12.1.1",
+    "require-dir": "^1.2.0",
     "styled-components": "^5.3.0",
     "styled-system": "^5.1.5"
   },

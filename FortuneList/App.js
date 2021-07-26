@@ -10,8 +10,8 @@ import {
   View,
 } from 'react-native';
 
+import fortune from './loadfortunes';
 import {NativeBaseProvider, FlatList, IconButton} from 'native-base';
-import fortune from '../jsonfortunes/songs-poems.json';
 import Prompt from './Prompt';
 import FortuneItem from './FortuneItem';
 import DrawerView from './DrawerView';
@@ -35,7 +35,7 @@ const AppStart = () => {
             contentInsetAdjustmentBehavior="automatic"
             style={backgroundStyle}>
             <FlatList
-              data={fortune}
+              data={fortune(200)}
               renderItem={({item}) => <FortuneItem item={item} />}
               keyExtractor={item => item.k}
             />
