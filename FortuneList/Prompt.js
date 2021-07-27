@@ -17,7 +17,7 @@ const Prompt = ({drawer}) => {
           />
         </Center>
         <Center>
-          <Heading size="md">root@android:# fortune fortune</Heading>
+          <Heading size="md">root@android:# fortune</Heading>
         </Center>
       </HStack>
     </View>
