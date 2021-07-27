@@ -32,7 +32,7 @@ const AppStart = () => {
       ref={drawer}
       drawerWidth={300}
       drawerPosition={'left'}
-      renderNavigationView={DrawerView}>
+      renderNavigationView={() => <DrawerView />}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <SafeAreaView style={backgroundStyle}>
         <View>
