@@ -1,17 +1,16 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   StyleSheet,
   useColorScheme,
   DrawerLayoutAndroid,
-  Text,
   View,
+  FlatList,
 } from 'react-native';
 
 import fortune from './loadfortunes';
-import {NativeBaseProvider, FlatList, IconButton} from 'native-base';
+import {NativeBaseProvider} from 'native-base';
 import Prompt from './Prompt';
 import FortuneItem from './FortuneItem';
 import DrawerView from './DrawerView';
@@ -20,6 +19,13 @@ const AppStart = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const drawer = useRef(null);
   const backgroundStyle = isDarkMode ? styles.blackbg : styles.whitebg;
+
+  const [fortunes, setFortunes] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  useEffect(() => {
+    setFortunes(fortune(200));
+  }, []);
 
   return (
     <DrawerLayoutAndroid
@@ -31,15 +37,17 @@ const AppStart = () => {
       <SafeAreaView style={backgroundStyle}>
         <View>
           <Prompt drawer={drawer} />
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={backgroundStyle}>
-            <FlatList
-              data={fortune(200)}
-              renderItem={({item}) => <FortuneItem item={item} />}
-              keyExtractor={item => item.k}
-            />
-          </ScrollView>
+          <FlatList
+            data={fortunes}
+            renderItem={({item}) => <FortuneItem item={item} />}
+            keyExtractor={(item, i) => i}
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);
+              setFortunes(fortune(200));
+              setRefreshing(false);
+            }}
+          />
         </View>
       </SafeAreaView>
     </DrawerLayoutAndroid>

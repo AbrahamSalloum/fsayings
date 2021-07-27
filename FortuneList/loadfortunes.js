@@ -41,6 +41,52 @@ import wisdom from '../jsonfortunes/wisdom.json';
 import work from '../jsonfortunes/work.json';
 import zippy from '../jsonfortunes/zippy.json';
 
+export const catlist = [
+  {catname: 'art'},
+  {catname: 'ascii-art'},
+  {catname: 'computers'},
+  {catname: 'cookie'},
+  {catname: 'debian'},
+  {catname: 'definitions'},
+  {catname: 'disclaimer'},
+  {catname: 'drugs'},
+  {catname: 'education'},
+  {catname: 'ethnic'},
+  {catname: 'food'},
+  {catname: 'fortunes'},
+  {catname: 'goedel'},
+  {catname: 'humorists'},
+  {catname: 'kids'},
+  {catname: 'knghtbrd'},
+  {catname: 'law'},
+  {catname: 'linux'},
+  {catname: 'linuxcookie'},
+  {catname: 'literature'},
+  {catname: 'love'},
+  {catname: 'magic'},
+  {catname: 'medicine'},
+  {catname: 'men-women'},
+  {catname: 'miscellaneous'},
+  {catname: 'news'},
+  {catname: 'paradoxum'},
+  {catname: 'people'},
+  {catname: 'perl'},
+  {catname: 'pets'},
+  {catname: 'platitudes'},
+  {catname: 'politics'},
+  {catname: 'pratchett'},
+  {catname: 'riddles'},
+  {catname: 'science'},
+  {catname: 'songs-poems'},
+  {catname: 'sports'},
+  {catname: 'startrek'},
+  {catname: 'tao'},
+  {catname: 'translate-me'},
+  {catname: 'wisdom'},
+  {catname: 'work'},
+  {catname: 'zippy'},
+];
+
 const fortunefiles = {
   art,
   asciiart,
@@ -83,22 +129,34 @@ const fortunefiles = {
   translateme,
   wisdom,
   zippy,
+  work,
+};
+
+export const stringToColour = stri => {
+  const str = stri.toString();
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let colour = '#';
+  for (let i = 0; i < 3; i++) {
+    let value = (hash >> (i * 8)) & 0xff;
+    colour += ('00' + value.toString(16)).substr(-2);
+  }
+
+  return colour + '66';
 };
 
 const getrandom = (amount = 200) => {
   let assortment = [];
-  let i = 0;
-  while (i < amount) {
+  for (let i = 0; i < amount; i++) {
     const randomcat = Math.floor(
       Math.random() * Object.keys(fortunefiles).length,
     );
     const cat = fortunefiles[Object.keys(fortunefiles)[randomcat]];
     const randomfortune = Math.floor(Math.random() * cat.length);
-    r = Math.random().toString(36).substring(7);
     const f = cat[randomfortune];
-    f.k = i;
     assortment.push(f);
-    i++;
   }
   return assortment;
 };

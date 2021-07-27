@@ -10,7 +10,6 @@ const Prompt = ({drawer}) => {
             variant="solid"
             icon={<HamburgerIcon />}
             onPress={() => {
-              console.log('Hello');
               drawer.current.openDrawer();
             }}
             color="white"
