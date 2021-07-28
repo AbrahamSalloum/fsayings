@@ -48,8 +48,8 @@ export const storeFortuneSelection = async value => {
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem('@fortunevalues', jsonValue);
-  } catch (e) {
-    // saving error
+  } catch (err) {
+    return err;
   }
 };
 
@@ -57,8 +57,8 @@ const getFortuneSelection = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('@fortunevalues');
     return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    return e;
+  } catch (err) {
+    return err;
   }
 };
 
@@ -182,7 +182,7 @@ const getrandom = async (amount = 200) => {
       }
     }
   });
-  
+
   for (let i = 0; i < amount; i++) {
     randomcat = Math.floor(Math.random() * allowedfortunes.length);
     const cat = fortunefiles[allowedfortunes[randomcat]];

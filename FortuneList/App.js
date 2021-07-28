@@ -49,7 +49,7 @@ const AppStart = () => {
             refreshing={refreshing}
             onRefresh={() => {
               setRefreshing(true);
-              getandfortunes(200)
+              getandfortunes(200);
               setRefreshing(false);
             }}
           />
