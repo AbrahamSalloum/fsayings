@@ -23,8 +23,13 @@ const AppStart = () => {
   const [fortunes, setFortunes] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
+  const getandfortunes = async num => {
+    const f = await fortune(num);
+    setFortunes(f);
+  };
+
   useEffect(() => {
-    setFortunes(fortune(200));
+    getandfortunes(200);
   }, []);
 
   return (
@@ -44,7 +49,7 @@ const AppStart = () => {
             refreshing={refreshing}
             onRefresh={() => {
               setRefreshing(true);
-              setFortunes(fortune(200));
+              getandfortunes(200)
               setRefreshing(false);
             }}
           />

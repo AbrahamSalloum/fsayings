@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View, FlatList, Switch} from 'react-native';
 import {HStack, Heading} from 'native-base';
-import {catlist} from './loadfortunes';
+import {catlist, storeFortuneSelection} from './loadfortunes';
 
 const DrawerView = () => {
   const [cattoggles, setCattoggles] = useState(false);
@@ -14,7 +14,7 @@ const DrawerView = () => {
     setCattoggles(initcattoggles);
   }, []);
 
-  while (cattoggles == false) {
+  while (cattoggles === false) {
     return <Text>loading...</Text>;
   }
 
@@ -27,8 +27,17 @@ const DrawerView = () => {
         <View style={{flex: 1}}>
           <Switch
             onValueChange={v => {
-              cattoggles[item.catname].toggle = !cattoggles[item.catname].toggle;
-              setCattoggles(cattoggles);
+              cattoggles[item.catname].toggle =
+                !cattoggles[item.catname].toggle;
+              const catchanged = item.catname || null;
+              setCattoggles(prev => ({
+                ...prev,
+                catchanged: {
+                  ...cattoggles[catchanged],
+                  toggle: !cattoggles[catchanged].toggle,
+                },
+              }));
+              storeFortuneSelection(cattoggles);
             }}
             value={cattoggles[item.catname].toggle}
           />

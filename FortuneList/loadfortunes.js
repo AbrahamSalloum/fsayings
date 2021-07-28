@@ -5,6 +5,7 @@ import cookie from '../jsonfortunes/cookie.json';
 import debian from '../jsonfortunes/debian.json';
 import definitions from '../jsonfortunes/definitions.json';
 import drugs from '../jsonfortunes/drugs.json';
+import disclaimer from '../jsonfortunes/disclaimer.json';
 import education from '../jsonfortunes/education.json';
 import ethnic from '../jsonfortunes/ethnic.json';
 import food from '../jsonfortunes/food.json';
@@ -41,9 +42,29 @@ import wisdom from '../jsonfortunes/wisdom.json';
 import work from '../jsonfortunes/work.json';
 import zippy from '../jsonfortunes/zippy.json';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const storeFortuneSelection = async value => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem('@fortunevalues', jsonValue);
+  } catch (e) {
+    // saving error
+  }
+};
+
+const getFortuneSelection = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem('@fortunevalues');
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    return e;
+  }
+};
+
 export const catlist = [
   {catname: 'art'},
-  {catname: 'ascii-art'},
+  {catname: 'asciiart'},
   {catname: 'computers'},
   {catname: 'cookie'},
   {catname: 'debian'},
@@ -65,7 +86,7 @@ export const catlist = [
   {catname: 'love'},
   {catname: 'magic'},
   {catname: 'medicine'},
-  {catname: 'men-women'},
+  {catname: 'menwomen'},
   {catname: 'miscellaneous'},
   {catname: 'news'},
   {catname: 'paradoxum'},
@@ -77,11 +98,11 @@ export const catlist = [
   {catname: 'pratchett'},
   {catname: 'riddles'},
   {catname: 'science'},
-  {catname: 'songs-poems'},
+  {catname: 'songspoems'},
   {catname: 'sports'},
   {catname: 'startrek'},
   {catname: 'tao'},
-  {catname: 'translate-me'},
+  {catname: 'translateme'},
   {catname: 'wisdom'},
   {catname: 'work'},
   {catname: 'zippy'},
@@ -94,6 +115,7 @@ const fortunefiles = {
   cookie,
   debian,
   definitions,
+  disclaimer,
   drugs,
   education,
   ethnic,
@@ -147,17 +169,28 @@ export const stringToColour = stri => {
   return colour + '66';
 };
 
-const getrandom = (amount = 200) => {
+const getrandom = async (amount = 200) => {
+  let randomcat;
   let assortment = [];
+  const fortunesettings = await getFortuneSelection();
+  const allowedfortunes = [];
+
+  Object.keys(fortunesettings).forEach(c => {
+    if (fortunesettings[c].toggle === true) {
+      if (Object.keys(fortunefiles).includes(c)) {
+        allowedfortunes.push(c);
+      }
+    }
+  });
+  
   for (let i = 0; i < amount; i++) {
-    const randomcat = Math.floor(
-      Math.random() * Object.keys(fortunefiles).length,
-    );
-    const cat = fortunefiles[Object.keys(fortunefiles)[randomcat]];
+    randomcat = Math.floor(Math.random() * allowedfortunes.length);
+    const cat = fortunefiles[allowedfortunes[randomcat]];
     const randomfortune = Math.floor(Math.random() * cat.length);
     const f = cat[randomfortune];
     assortment.push(f);
   }
+
   return assortment;
 };
 
