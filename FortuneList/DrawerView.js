@@ -5,6 +5,7 @@ import {catlist, storeFortuneSelection} from './loadfortunes';
 
 const DrawerView = () => {
   const [cattoggles, setCattoggles] = useState(false);
+  const [all, setall] = useState(true);
 
   useEffect(() => {
     const initcattoggles = {};
@@ -50,6 +51,25 @@ const DrawerView = () => {
     <View style={{flex: 1}}>
       <Heading>Settings</Heading>
       <Heading size="xs">Toggle Categorties </Heading>
+      <HStack alignItems="center">
+        <View style={{flex: 1}}>
+          <Text>All</Text>
+        </View>
+        <View style={{flex: 1}}>
+          <Switch
+            onValueChange={() => {
+              const initcattoggles = {};
+              for (let i of catlist) {
+                initcattoggles[i.catname] = {...i, toggle: !all};
+              }
+              setCattoggles(initcattoggles);
+              setall(!all);
+              storeFortuneSelection(initcattoggles);
+            }}
+            value={all}
+          />
+        </View>
+      </HStack>
       <FlatList
         data={catlist}
         renderItem={renderListItem}
