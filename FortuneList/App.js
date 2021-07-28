@@ -33,6 +33,7 @@ const AppStart = () => {
   }, []);
 
   return (
+    
     <DrawerLayoutAndroid
       ref={drawer}
       drawerWidth={300}

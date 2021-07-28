@@ -53,7 +53,7 @@ export const storeFortuneSelection = async value => {
   }
 };
 
-const getFortuneSelection = async () => {
+export const getFortuneSelection = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem('@fortunevalues');
     return jsonValue != null ? JSON.parse(jsonValue) : null;

@@ -6,9 +6,16 @@ import {
   Switch,
   useColorScheme,
   StyleSheet,
+  Button,
+  SafeAreaView,
+  Alert,
 } from 'react-native';
 import {HStack, Heading} from 'native-base';
-import {catlist, storeFortuneSelection} from './loadfortunes';
+import {
+  catlist,
+  storeFortuneSelection,
+  getFortuneSelection,
+} from './loadfortunes';
 
 const DrawerView = () => {
   const [cattoggles, setCattoggles] = useState(false);
@@ -18,11 +25,21 @@ const DrawerView = () => {
   const backgroundStyle = isDarkMode ? styles.blackbg : styles.whitebg;
 
   useEffect(() => {
-    const initcattoggles = {};
-    for (let i of catlist) {
-      initcattoggles[i.catname] = {...i, toggle: true};
-    }
-    setCattoggles(initcattoggles);
+    const getsettingsorloaddefaults = async () => {
+      const settings = await getFortuneSelection();
+      if (settings) {
+        setCattoggles(settings);
+        storeFortuneSelection(settings);
+      } else {
+        const initcattoggles = {};
+        for (let i of catlist) {
+          initcattoggles[i.catname] = {...i, toggle: true};
+        }
+        setCattoggles(initcattoggles);
+        storeFortuneSelection(initcattoggles);
+      }
+    };
+    getsettingsorloaddefaults();
   }, []);
 
   while (cattoggles === false) {
@@ -60,27 +77,16 @@ const DrawerView = () => {
   };
 
   return (
-    <View style={backgroundStyle}>
+    <SafeAreaView style={backgroundStyle}>
       <Heading style={backgroundStyle}>Settings</Heading>
       <Heading size="xs" style={backgroundStyle}>
         Toggle Categorties{' '}
       </Heading>
       <HStack alignItems="center">
-        <View>
-          <Text style={backgroundStyle}>All</Text>
-        </View>
         <View style={{flex: 1}}>
-          <Switch
-            onValueChange={() => {
-              const initcattoggles = {};
-              for (let i of catlist) {
-                initcattoggles[i.catname] = {...i, toggle: !all};
-              }
-              setCattoggles(initcattoggles);
-              setall(!all);
-              storeFortuneSelection(initcattoggles);
-            }}
-            value={all}
+          <Button
+            title="Toggle All"
+            OnPress={() => Alert.alert('Simple Button pressed')}
           />
         </View>
       </HStack>
@@ -89,7 +95,7 @@ const DrawerView = () => {
         renderItem={renderListItem}
         keyExtractor={item => item.catname}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
