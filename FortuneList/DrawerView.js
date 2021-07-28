@@ -1,11 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, FlatList, Switch} from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Switch,
+  useColorScheme,
+  StyleSheet,
+} from 'react-native';
 import {HStack, Heading} from 'native-base';
 import {catlist, storeFortuneSelection} from './loadfortunes';
 
 const DrawerView = () => {
   const [cattoggles, setCattoggles] = useState(false);
   const [all, setall] = useState(true);
+
+  const isDarkMode = useColorScheme() === 'dark';
+  const backgroundStyle = isDarkMode ? styles.blackbg : styles.whitebg;
 
   useEffect(() => {
     const initcattoggles = {};
@@ -23,9 +33,11 @@ const DrawerView = () => {
     return (
       <HStack alignItems="center">
         <View style={{flex: 1}}>
-          <Text fontSize="lg">{item.catname}</Text>
+          <Text fontSize="lg" style={backgroundStyle}>
+            {item.catname}
+          </Text>
         </View>
-        <View style={{flex: 1}}>
+        <View>
           <Switch
             onValueChange={v => {
               cattoggles[item.catname].toggle =
@@ -48,12 +60,14 @@ const DrawerView = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
-      <Heading>Settings</Heading>
-      <Heading size="xs">Toggle Categorties </Heading>
+    <View style={backgroundStyle}>
+      <Heading style={backgroundStyle}>Settings</Heading>
+      <Heading size="xs" style={backgroundStyle}>
+        Toggle Categorties{' '}
+      </Heading>
       <HStack alignItems="center">
-        <View style={{flex: 1}}>
-          <Text>All</Text>
+        <View>
+          <Text style={backgroundStyle}>All</Text>
         </View>
         <View style={{flex: 1}}>
           <Switch
@@ -78,5 +92,21 @@ const DrawerView = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  whitecolor: {
+    color: '#41FF00',
+  },
+  blackcolor: {
+    color: 'black',
+  },
+  blackbg: {
+    backgroundColor: '#332940',
+    color: 'white',
+  },
+  whitebg: {
+    backgroundColor: 'white',
+  },
+});
 
 export default DrawerView;

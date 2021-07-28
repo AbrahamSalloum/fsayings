@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',
+    color: 'white',
   },
   sectionDescription: {
     marginTop: 8,
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   blackbg: {
-    backgroundColor: 'black',
+    backgroundColor: "#332940",
   },
   whitebg: {
     backgroundColor: 'white',

@@ -173,16 +173,22 @@ const getrandom = async (amount = 200) => {
   let randomcat;
   let assortment = [];
   const fortunesettings = await getFortuneSelection();
-  const allowedfortunes = [];
+  let allowedfortunes = [];
 
-  Object.keys(fortunesettings).forEach(c => {
-    if (fortunesettings[c].toggle === true) {
-      if (Object.keys(fortunefiles).includes(c)) {
-        allowedfortunes.push(c);
+  if (!!fortunesettings == false) {
+    allowedfortunes = Object.keys(fortunefiles);
+  } else {
+    Object.keys(fortunesettings).forEach(c => {
+      if (fortunesettings[c].toggle === true) {
+        if (Object.keys(fortunefiles).includes(c)) {
+          allowedfortunes.push(c);
+        }
       }
-    }
-  });
-
+    });
+  }
+  if (allowedfortunes.length === 0) {
+    return [{t: 'notice', f: 'Select at least one category\n\n\n'}];
+  }
   for (let i = 0; i < amount; i++) {
     randomcat = Math.floor(Math.random() * allowedfortunes.length);
     const cat = fortunefiles[allowedfortunes[randomcat]];
