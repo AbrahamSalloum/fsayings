@@ -7,33 +7,32 @@ import {
   DrawerLayoutAndroid,
   View,
   FlatList,
+  Text,
 } from 'react-native';
 
-import fortune from './loadfortunes';
+import getfortune from './loadfortunes';
 import {NativeBaseProvider} from 'native-base';
 import Prompt from './Prompt';
 import FortuneItem from './FortuneItem';
 import DrawerView from './DrawerView';
+import {Provider, useSelector} from 'react-redux';
+import {fortunefiles} from './fortuneretucers';
+import {store} from './store/store.js';
 
 const AppStart = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const drawer = useRef(null);
   const backgroundStyle = isDarkMode ? styles.blackbg : styles.whitebg;
-
-  const [fortunes, setFortunes] = useState(false);
+  const fortunes = useSelector(fortunefiles);
   const [refreshing, setRefreshing] = useState(false);
 
-  const getandfortunes = async num => {
-    const f = await fortune(num);
-    setFortunes(f);
-  };
-
   useEffect(() => {
-    getandfortunes(200);
+    getfortune(200);
   }, []);
 
+  while (!!fortunes === false) return <Text>OK</Text>;
+
   return (
-    
     <DrawerLayoutAndroid
       ref={drawer}
       drawerWidth={300}
@@ -50,7 +49,7 @@ const AppStart = () => {
             refreshing={refreshing}
             onRefresh={() => {
               setRefreshing(true);
-              getandfortunes(200);
+              getfortune(200);
               setRefreshing(false);
             }}
           />
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   blackbg: {
-    backgroundColor: "#332940",
+    backgroundColor: '#332940',
   },
   whitebg: {
     backgroundColor: 'white',
@@ -88,9 +87,11 @@ const styles = StyleSheet.create({
 
 const App = () => {
   return (
-    <NativeBaseProvider>
-      <AppStart />
-    </NativeBaseProvider>
+    <Provider store={store}>
+      <NativeBaseProvider>
+        <AppStart />
+      </NativeBaseProvider>
+    </Provider>
   );
 };
 export default App;

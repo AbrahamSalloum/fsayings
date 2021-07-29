@@ -44,6 +44,9 @@ import zippy from '../jsonfortunes/zippy.json';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import {setfortunefiles} from './fortuneretucers';
+import {store} from './store/store.js';
+
 export const storeFortuneSelection = async value => {
   try {
     const jsonValue = JSON.stringify(value);
@@ -187,7 +190,10 @@ const getrandom = async (amount = 200) => {
     });
   }
   if (allowedfortunes.length === 0) {
-    return [{t: 'notice', f: 'Select at least one category\n\n\n'}];
+    store.dispatch(
+      setfortunefiles([{t: 'notice', f: 'Select at least one category\n\n\n'}]),
+    );
+    return;
   }
   for (let i = 0; i < amount; i++) {
     randomcat = Math.floor(Math.random() * allowedfortunes.length);
@@ -197,7 +203,8 @@ const getrandom = async (amount = 200) => {
     assortment.push(f);
   }
 
-  return assortment;
+  store.dispatch(setfortunefiles(assortment));
+  console.log(store.getState());
 };
 
 export default getrandom;

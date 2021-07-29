@@ -9,12 +9,14 @@ import {
   Button,
   SafeAreaView,
 } from 'react-native';
-import {HStack, Heading} from 'native-base';
+import {HStack, VStack, Heading} from 'native-base';
 import {
   catlist,
   storeFortuneSelection,
   getFortuneSelection,
 } from './loadfortunes';
+
+import SearchFortune from './SearchFortune';
 
 const DrawerView = () => {
   const [cattoggles, setCattoggles] = useState(false);
@@ -97,6 +99,9 @@ const DrawerView = () => {
           />
         </View>
       </HStack>
+      <VStack alignItems="center">
+        <SearchFortune />
+      </VStack>
       <FlatList
         data={catlist}
         renderItem={renderListItem}
