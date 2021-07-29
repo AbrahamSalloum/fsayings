@@ -204,7 +204,6 @@ const getrandom = async (amount = 200) => {
   }
 
   store.dispatch(setfortunefiles(assortment));
-  console.log(store.getState());
 };
 
 export default getrandom;

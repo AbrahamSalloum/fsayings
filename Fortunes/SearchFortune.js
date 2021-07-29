@@ -1,21 +1,27 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
-import {Input} from 'native-base';
-import {catlist} from './loadfortunes';
+import {View, Alert} from 'react-native';
+import {Input, Button,} from 'native-base';
+import {store} from './store/store.js';
+import {setsearchterm} from './fortuneretucers';
 
 const SearchFortune = () => {
-  const [searchterm, setSearchTerm] = useState('Search Keywords..');
+  const [searchtermlocal, setSearchTermlocal] = useState('Search Keywords..');
 
   const handleChange = s => {
-    setSearchTerm(s);
+    setSearchTermlocal(s.nativeEvent.text);
   };
+
+  const submit = () => {
+    store.dispatch(setsearchterm(searchtermlocal));
+  }
   return (
     <View style={{width: '100%', backgroundColor: 'grey'}}>
       <Input
         width="100%"
-        value={searchterm}
-        onChange={handleChange}
+        placeholder={searchtermlocal}
+        onChange={(s) => handleChange(s)}
         placeholder="Search Keywords"
+        InputRightElement={<Button onPress={() => submit()}>GO</Button>}
       />
     </View>
   );

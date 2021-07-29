@@ -19,7 +19,6 @@ export const fortuneSlice = createSlice({
 });
 
 export const {setfortunefiles, setsearchterm} = fortuneSlice.actions;
-
 export const fortunefiles = state => state.fortunedata.fortunefiles;
 export const searchterm = state => state.fortunedata.searchterm;
 
