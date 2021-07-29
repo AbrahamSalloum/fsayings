@@ -8,7 +8,6 @@ import {
   StyleSheet,
   Button,
   SafeAreaView,
-  Alert,
 } from 'react-native';
 import {HStack, Heading} from 'native-base';
 import {
@@ -86,7 +85,15 @@ const DrawerView = () => {
         <View style={{flex: 1}}>
           <Button
             title="Toggle All"
-            OnPress={() => Alert.alert('Simple Button pressed')}
+            onPress={() => {
+              const initcattoggles = {};
+              for (let i of catlist) {
+                initcattoggles[i.catname] = {...i, toggle: !all};
+              }
+              setall(!all);
+              setCattoggles(initcattoggles);
+              storeFortuneSelection(initcattoggles);
+            }}
           />
         </View>
       </HStack>
