@@ -203,8 +203,22 @@ const getrandom = async (amount = 200) => {
     assortment.push(f);
   }
 
-  store.dispatch(setfortunefiles(assortment));
+  store.dispatch(setfortunefiles(shuffle(assortment)));
 };
+
+function shuffle(array) {
+  let currentIndex = array.length;
+  let randomIndex;
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex],
+      array[currentIndex],
+    ];
+  }
+  return array;
+}
 
 export const SearchFortuneText = () => {
   const searchterm = store.getState().fortunedata.searchterm;
@@ -222,7 +236,8 @@ export const SearchFortuneText = () => {
       }
     }
   }
-  store.dispatch(setfortunefiles(searchmatches));
+  searchmatches.sort(() => 0.5 - Math.random()); // good enough randomise
+  store.dispatch(setfortunefiles(shuffle(searchmatches)));
 };
 
 export default getrandom;

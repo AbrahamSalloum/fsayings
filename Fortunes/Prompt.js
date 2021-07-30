@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, StyleSheet, useColorScheme} from 'react-native';
-import {IconButton, HamburgerIcon, HStack, Heading, Center} from 'native-base';
+import {IconButton, HamburgerIcon, HStack, Heading, Center } from 'native-base';
+
 const Prompt = ({drawer}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const TextColor = isDarkMode ? styles.greencolor : styles.blackcolor;
