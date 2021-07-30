@@ -19,9 +19,9 @@ const SearchFortune = () => {
     <View style={{width: '100%', backgroundColor: 'grey'}}>
       <Input
         width="100%"
-        placeholder={searchtermlocal}
         onChange={s => handleChange(s)}
         InputRightElement={<Button onPress={() => submit()}>GO</Button>}
+        placeholder={'Search..'}
       />
     </View>
   );
