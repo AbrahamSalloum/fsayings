@@ -228,7 +228,7 @@ export const SearchFortuneText = () => {
   }
 
   const searchmatches = [];
-  const regex = new RegExp(searchterm);
+  const regex = new RegExp(searchterm, "gi");
   for (let cat in fortunefiles) {
     for (let entry of fortunefiles[cat]) {
       if (regex.test(entry.f)) {
