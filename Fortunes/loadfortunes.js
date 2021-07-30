@@ -206,4 +206,23 @@ const getrandom = async (amount = 200) => {
   store.dispatch(setfortunefiles(assortment));
 };
 
+export const SearchFortuneText = () => {
+  const searchterm = store.getState().fortunedata.searchterm;
+  if (!!searchterm === false) {
+    getrandom(200);
+    return;
+  }
+
+  const searchmatches = [];
+  const regex = new RegExp(searchterm);
+  for (let cat in fortunefiles) {
+    for (let entry of fortunefiles[cat]) {
+      if (regex.test(entry.f)) {
+        searchmatches.push(entry);
+      }
+    }
+  }
+  store.dispatch(setfortunefiles(searchmatches));
+};
+
 export default getrandom;
