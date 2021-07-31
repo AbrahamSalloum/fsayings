@@ -24,7 +24,7 @@ const FortunToggles = () => {
 
   const renderListItem = ({item}) => {
     return (
-      <HStack alignItems="center">
+      <HStack alignItems="center" >
         <View style={{flex: 1}}>
           <Text fontSize="lg" style={backgroundStyle}>
             {item.catname}
@@ -69,12 +69,11 @@ const FortunToggles = () => {
     };
     getsettingsorloaddefaults();
   }, []);
-
   while (cattoggles === false) {
     return <Text>loading...</Text>;
   }
   return (
-    <View>
+    <View style={{flex: 1}}>
       <HStack alignItems="center">
         <View style={{flex: 1}}>
           <Button

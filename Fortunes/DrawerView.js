@@ -1,19 +1,17 @@
-import React, {useEffect, useState} from 'react';
-import {useColorScheme, StyleSheet, SafeAreaView} from 'react-native';
+import React from 'react';
+import {useColorScheme, StyleSheet, SafeAreaView, View} from 'react-native';
 import {Heading, Divider} from 'native-base';
 
 import SearchFortune from './SearchFortune';
 import CharRange from './CharRange';
-import FortunToggles from './FortuneToggles'
+import FortunToggles from './FortuneToggles';
 
 const DrawerView = ({drawer}) => {
-
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = isDarkMode ? styles.blackbg : styles.whitebg;
 
-
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <View style={{...backgroundStyle, flex: 1}}>
       <Heading style={backgroundStyle}>Settings</Heading>
       <Divider my={2} />
       <SearchFortune drawer={drawer} />
@@ -21,7 +19,7 @@ const DrawerView = ({drawer}) => {
       <CharRange />
       <Divider my={2} />
       <FortunToggles />
-    </SafeAreaView>
+    </View>
   );
 };
 

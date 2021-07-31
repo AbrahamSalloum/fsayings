@@ -30,7 +30,7 @@ const AppStart = () => {
     getfortune(200);
   }, []);
 
-  while (!!fortunes === false) return <Text>OK</Text>;
+  // while (!!fortunes === false) return <Text>OK</Text>;
 
   return (
     <DrawerLayoutAndroid

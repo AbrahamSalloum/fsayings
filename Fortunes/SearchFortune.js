@@ -4,6 +4,7 @@ import {Input, Button} from 'native-base';
 import {useDispatch} from 'react-redux';
 import {setsearchterm} from './fortuneretucers';
 import {SearchFortuneText} from './loadfortunes';
+
 const SearchFortune = ({drawer}) => {
   const [searchtermlocal, setSearchTermlocal] = useState('Search Keywords..');
   const dispatch = useDispatch();
@@ -15,9 +16,10 @@ const SearchFortune = ({drawer}) => {
     dispatch(setsearchterm(searchtermlocal));
     SearchFortuneText();
     drawer.current.closeDrawer();
+    //dispatch(setsearchterm(false));
   };
   return (
-    <View style={{width: '100%', backgroundColor: 'grey'}}>
+    <View>
       <Input
         width="100%"
         onChange={s => handleChange(s)}

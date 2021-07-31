@@ -46,6 +46,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {setfortunefiles} from './fortuneretucers';
 import {store} from './store/store.js';
+import {minHeight} from 'styled-system';
 
 export const storeFortuneSelection = async value => {
   try {
@@ -172,13 +173,20 @@ export const stringToColour = stri => {
   return colour + '66';
 };
 
+const badtimer = (starttime, length) => {
+  return Date.now() - starttime < length;
+};
+
 const getrandom = async (amount = 200) => {
+  const minlength = store.getState().fortunedata.minlength;
+  const maxlength = store.getState().fortunedata.maxlength;
+
   let randomcat;
-  let assortment = [];
+  let assortment = new Set();
   const fortunesettings = await getFortuneSelection();
   let allowedfortunes = [];
 
-  if (!!fortunesettings == false) {
+  if (!!fortunesettings === false) {
     allowedfortunes = Object.keys(fortunefiles);
   } else {
     Object.keys(fortunesettings).forEach(c => {
@@ -195,15 +203,38 @@ const getrandom = async (amount = 200) => {
     );
     return;
   }
-  for (let i = 0; i < amount; i++) {
+
+  let startTime = Date.now();
+  while (assortment.size < amount && badtimer(startTime, 4000)) {
     randomcat = Math.floor(Math.random() * allowedfortunes.length);
     const cat = fortunefiles[allowedfortunes[randomcat]];
     const randomfortune = Math.floor(Math.random() * cat.length);
     const f = cat[randomfortune];
-    assortment.push(f);
+    console.log(minlength, maxlength)
+    if (!!maxlength || !!minlength) {
+      if (!!maxlength && !!minlength) {
+        if (f.f.length <= maxlength && f.f.length >= minHeight) {
+          assortment.add(f);
+          continue;
+        }
+      }
+      if (!!maxlength === true) {
+        if (f.f.length <= maxlength) {
+          assortment.add(f);
+          continue;
+        }
+      }
+      if (!!minlength === true) {
+        if (f.f.length >= minlength) {
+          assortment.add(f);
+          continue;
+        }
+      }
+    } else {
+      assortment.add(f);
+    }
   }
-
-  store.dispatch(setfortunefiles(shuffle(assortment)));
+  store.dispatch(setfortunefiles(shuffle([...assortment])));
 };
 
 function shuffle(array) {
@@ -228,7 +259,7 @@ export const SearchFortuneText = () => {
   }
 
   const searchmatches = [];
-  const regex = new RegExp(searchterm, "gi");
+  const regex = new RegExp(searchterm, 'gi');
   for (let cat in fortunefiles) {
     for (let entry of fortunefiles[cat]) {
       if (regex.test(entry.f)) {
@@ -236,7 +267,7 @@ export const SearchFortuneText = () => {
       }
     }
   }
-  searchmatches.sort(() => 0.5 - Math.random()); // good enough randomise
+  // searchmatches.sort(() => 0.5 - Math.random()); // good enough randomise
   store.dispatch(setfortunefiles(shuffle(searchmatches)));
 };
 
