@@ -9,7 +9,7 @@ const SearchFortune = ({drawer}) => {
   const [searchtermlocal, setSearchTermlocal] = useState('Search Keywords..');
   const dispatch = useDispatch();
   const handleChange = s => {
-    setSearchTermlocal(s.nativeEvent.text);
+    setSearchTermlocal(s.nativeEvent.text.toString());
   };
 
   const submit = () => {

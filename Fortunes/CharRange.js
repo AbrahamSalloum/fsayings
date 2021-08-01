@@ -12,7 +12,6 @@ const CharRange = () => {
   const dispatch = useDispatch();
 
   const submit = () => {
-    console.log('AAA', min, max);
     dispatch(setmaxlength(max));
     dispatch(setminlength(min));
     getrandom();

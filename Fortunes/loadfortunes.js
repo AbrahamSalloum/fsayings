@@ -46,7 +46,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {setfortunefiles} from './fortuneretucers';
 import {store} from './store/store.js';
-import {minHeight} from 'styled-system';
 
 export const storeFortuneSelection = async value => {
   try {
@@ -159,7 +158,7 @@ const fortunefiles = {
 };
 
 export const stringToColour = stri => {
-  const str = stri.toString();
+  let str = stri.toString();
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -178,12 +177,10 @@ const badtimer = (starttime, length) => {
 };
 
 const getrandom = async (amount = 200) => {
-  const minlength = store.getState().fortunedata.minlength;
-  const maxlength = store.getState().fortunedata.maxlength;
-
-  let randomcat;
+  let minlength = store.getState().fortunedata.minlength;
+  let maxlength = store.getState().fortunedata.maxlength;
   let assortment = new Set();
-  const fortunesettings = await getFortuneSelection();
+  let fortunesettings = await getFortuneSelection();
   let allowedfortunes = [];
 
   if (!!fortunesettings === false) {
@@ -206,25 +203,24 @@ const getrandom = async (amount = 200) => {
 
   let startTime = Date.now();
   while (assortment.size < amount && badtimer(startTime, 4000)) {
-    randomcat = Math.floor(Math.random() * allowedfortunes.length);
-    const cat = fortunefiles[allowedfortunes[randomcat]];
-    const randomfortune = Math.floor(Math.random() * cat.length);
-    const f = cat[randomfortune];
-    console.log(minlength, maxlength)
-    if (!!maxlength || !!minlength) {
-      if (!!maxlength && !!minlength) {
-        if (f.f.length <= maxlength && f.f.length >= minHeight) {
+    let randomcat = Math.floor(Math.random() * allowedfortunes.length); //pick a category at random
+    let cat = fortunefiles[allowedfortunes[randomcat]]; //pick a category at random
+    let randomfortune = Math.floor(Math.random() * cat.length); //pick a fortune number in that category
+    let f = cat[randomfortune]; // the fortune
+    if (!!maxlength === true || !!minlength === true) {
+      if (!!minlength === true && !!maxlength === true) {
+        if (f.f.length <= maxlength && f.f.length >= minlength) {
           assortment.add(f);
           continue;
         }
       }
-      if (!!maxlength === true) {
+      if (!!maxlength === true && !!minlength === false) {
         if (f.f.length <= maxlength) {
           assortment.add(f);
           continue;
         }
       }
-      if (!!minlength === true) {
+      if (!!minlength === true && !!maxlength === false) {
         if (f.f.length >= minlength) {
           assortment.add(f);
           continue;
@@ -237,7 +233,7 @@ const getrandom = async (amount = 200) => {
   store.dispatch(setfortunefiles(shuffle([...assortment])));
 };
 
-function shuffle(array) {
+const shuffle = array => {
   let currentIndex = array.length;
   let randomIndex;
   while (currentIndex !== 0) {
@@ -249,7 +245,7 @@ function shuffle(array) {
     ];
   }
   return array;
-}
+};
 
 export const SearchFortuneText = () => {
   const searchterm = store.getState().fortunedata.searchterm;
@@ -257,17 +253,22 @@ export const SearchFortuneText = () => {
     getrandom(200);
     return;
   }
-
-  const searchmatches = [];
-  const regex = new RegExp(searchterm, 'gi');
+  let searchmatches = [];
+  let regex;
+  try {
+    // if any invalid regex is inputted, just match everything
+    regex = new RegExp(searchterm, 'gi');
+  } catch {
+    regex = new RegExp('.*', 'gi');
+  }
   for (let cat in fortunefiles) {
     for (let entry of fortunefiles[cat]) {
-      if (regex.test(entry.f)) {
+      let ismatch = regex.test(entry.f);
+      if (!!ismatch === true) {
         searchmatches.push(entry);
       }
     }
   }
-  // searchmatches.sort(() => 0.5 - Math.random()); // good enough randomise
   store.dispatch(setfortunefiles(shuffle(searchmatches)));
 };
 

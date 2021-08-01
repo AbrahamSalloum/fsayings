@@ -13,7 +13,9 @@ const FortuneItem = ({item}) => {
         <Text>{item.t}</Text>
       </Box>
       <Box px={4}>
-        <Text style={TextColor}>{item.f}</Text>
+        <Text style={TextColor} selectable={true}>
+          {item.f}
+        </Text>
       </Box>
     </Box>
   );

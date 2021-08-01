@@ -1,5 +1,5 @@
 {
-  "name": "fortunes",
+  "name": "fsayings",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -17,6 +17,7 @@
     "path": "^0.12.7",
     "react": "17.0.1",
     "react-native": "0.64.2",
+    "react-native-rename": "^2.9.0",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-svg": "^12.1.1",
     "react-redux": "^7.2.4",
