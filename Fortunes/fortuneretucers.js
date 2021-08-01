@@ -5,6 +5,7 @@ const initialState = {
   searchterm: false,
   minlength: false,
   maxlength: false,
+  args: '-a',
 };
 
 export const fortuneSlice = createSlice({
@@ -23,14 +24,23 @@ export const fortuneSlice = createSlice({
     setmaxlength: (state, action) => {
       state.maxlength = action.payload;
     },
+    setargs: (state, action) => {
+      state.args = action.payload;
+    },
   },
 });
 
-export const {setfortunefiles, setsearchterm, setminlength, setmaxlength} =
-  fortuneSlice.actions;
+export const {
+  setfortunefiles,
+  setsearchterm,
+  setminlength,
+  setmaxlength,
+  setargs,
+} = fortuneSlice.actions;
 export const fortunefiles = state => state.fortunedata.fortunefiles;
 export const searchterm = state => state.fortunedata.searchterm;
 export const minlength = state => state.fortunedata.minlength;
 export const maxlength = state => state.fortunedata.maxlength;
+export const args = state => state.fortunedata.args;
 
 export default fortuneSlice.reducer;

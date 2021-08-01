@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, StyleSheet, useColorScheme} from 'react-native';
 import {HStack, VStack, Heading, Input, Button, Text} from 'native-base';
 import {useDispatch} from 'react-redux';
-import {setminlength, setmaxlength} from './fortuneretucers';
+import {setminlength, setmaxlength, setargs} from './fortuneretucers';
 import getrandom from './loadfortunes';
 const CharRange = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -15,17 +15,20 @@ const CharRange = () => {
     dispatch(setmaxlength(max));
     dispatch(setminlength(min));
     getrandom();
+    dispatch(setargs(`-l ${min} -s ${max}`));
+    dispatch(setmaxlength(false));
+    dispatch(setminlength(false));
   };
 
   const handleChange = (s, type) => {
     if (type === 'min') {
-      if (!!s.nativeEvent.text) {
+      if (!!s.nativeEvent.text === true) {
         setMin(s.nativeEvent.text);
       } else {
         setMin(false);
       }
     } else if (type === 'max') {
-      if (!!s.nativeEvent.text) {
+      if (!!s.nativeEvent.text === true) {
         setMax(s.nativeEvent.text);
       } else {
         setMax(false);

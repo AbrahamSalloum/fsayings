@@ -2,21 +2,22 @@ import React, {useState} from 'react';
 import {View} from 'react-native';
 import {Input, Button} from 'native-base';
 import {useDispatch} from 'react-redux';
-import {setsearchterm} from './fortuneretucers';
+import {setsearchterm, setargs} from './fortuneretucers';
 import {SearchFortuneText} from './loadfortunes';
 
 const SearchFortune = ({drawer}) => {
   const [searchtermlocal, setSearchTermlocal] = useState('Search Keywords..');
   const dispatch = useDispatch();
   const handleChange = s => {
-    setSearchTermlocal(s.nativeEvent.text.toString());
+    setSearchTermlocal(s.nativeEvent.text);
   };
 
   const submit = () => {
     dispatch(setsearchterm(searchtermlocal));
     SearchFortuneText();
     drawer.current.closeDrawer();
-    //dispatch(setsearchterm(false));
+    dispatch(setsearchterm(false));
+    dispatch(setargs(`-im /${searchtermlocal}/`));
   };
   return (
     <View>
