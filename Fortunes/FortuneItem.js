@@ -1,11 +1,10 @@
 import React from 'react';
 import {Box} from 'native-base';
-import {Text, StyleSheet, useColorScheme} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 import {stringToColour} from './loadfortunes';
 
-const FortuneItem = ({item}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const TextColor = isDarkMode ? styles.whitecolor : styles.blackcolor;
+const FortuneItem = ({item, isforceddarkmode}) => {
+  const TextColor = isforceddarkmode ? styles.whitecolor : styles.blackcolor;
 
   return (
     <Box border={1}>

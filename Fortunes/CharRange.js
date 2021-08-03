@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, useColorScheme} from 'react-native';
-import {HStack, VStack, Heading, Input, Button, Text} from 'native-base';
+import {View, StyleSheet} from 'react-native';
+import {HStack, VStack, Heading, Button, Text, Input} from 'native-base';
 import {useDispatch} from 'react-redux';
 import {setminlength, setmaxlength, setargs} from './fortuneretucers';
 import getrandom from './loadfortunes';
-const CharRange = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = isDarkMode ? styles.blackbg : styles.whitebg;
+const CharRange = ({isforceddarkmode}) => {
+  const backgroundStyle = isforceddarkmode ? styles.blackbg : styles.whitebg;
+  const textcolor = isforceddarkmode ? styles.whitecolor : styles.blackcolor;
   const [min, setMin] = useState(false);
   const [max, setMax] = useState(false);
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const CharRange = () => {
         Character Range:
       </Heading>
       <HStack>
-        <VStack style={{flex: 1}}>
+        <VStack style={{...backgroundStyle, flex: 1, marginRight: 3}}>
           <Heading size="xs" style={backgroundStyle}>
             Minimum
           </Heading>
@@ -51,18 +51,21 @@ const CharRange = () => {
             onChange={s => handleChange(s, 'min')}
           />
         </VStack>
-        <VStack style={{flex: 1}}>
+        <VStack style={{...backgroundStyle, flex: 1, marginRight: 3}}>
           <Heading size="xs" style={backgroundStyle}>
             Maximum
           </Heading>
           <Input
+            style={{color: '#FFFFFF'}}
             keyboardType="numeric"
             onChange={s => handleChange(s, 'max')}
           />
         </VStack>
         <VStack>
           <Text />
-          <Button onPress={() => submit()}>GO</Button>
+          <Button onPress={() => submit()}>
+            <Text style={styles.blackcolor}>GO</Text>
+          </Button>
         </VStack>
       </HStack>
     </View>
@@ -71,7 +74,7 @@ const CharRange = () => {
 
 const styles = StyleSheet.create({
   whitecolor: {
-    color: '#41FF00',
+    color: 'white',
   },
   blackcolor: {
     color: 'black',
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
   },
   whitebg: {
     backgroundColor: 'white',
+    color: 'black',
   },
 });
-
 export default CharRange;

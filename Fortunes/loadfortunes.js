@@ -230,7 +230,6 @@ const getrandom = async (amount = 200) => {
       store.dispatch(setargs(`-a`));
     }
   }
-  
   store.dispatch(setfortunefiles(shuffle([...assortment])));
 };
 

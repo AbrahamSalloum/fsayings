@@ -1,33 +1,36 @@
 import React from 'react';
-import {useColorScheme, StyleSheet, SafeAreaView, View} from 'react-native';
-import {Heading, Divider} from 'native-base';
-
+import {useColorScheme, StyleSheet, View} from 'react-native';
+import {Divider} from 'native-base';
 import SearchFortune from './SearchFortune';
 import CharRange from './CharRange';
 import FortunToggles from './FortuneToggles';
+import ToggleDarkMode from './ToggleDarkMode';
 
-const DrawerView = ({drawer}) => {
+const DrawerView = ({drawer, isforceddarkmode}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = isDarkMode ? styles.blackbg : styles.whitebg;
-
+  const isdarkmodeon = isDarkMode || isforceddarkmode 
+  const backgroundStyle = isdarkmodeon ? styles.blackbg : styles.whitebg;
   return (
-    <View style={{...backgroundStyle, flex: 1}}>
-      <Heading style={backgroundStyle}>Settings</Heading>
+    <View style={{...backgroundStyle, flex: 1, padding: 4}}>
       <Divider my={2} />
-      <SearchFortune drawer={drawer} />
+      <ToggleDarkMode isforceddarkmode={isdarkmodeon} />
       <Divider my={2} />
-      <CharRange />
+      <SearchFortune drawer={drawer} isforceddarkmode={isdarkmodeon} />
       <Divider my={2} />
-      <FortunToggles />
+      <CharRange isforceddarkmode={isdarkmodeon} />
+      <Divider my={2} />
+      <FortunToggles isforceddarkmode={isdarkmodeon} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   whitecolor: {
+    backgroundColor: '#332940',
     color: '#41FF00',
   },
   blackcolor: {
+    backgroundColor: '#332940',
     color: 'black',
   },
   blackbg: {
@@ -36,6 +39,7 @@ const styles = StyleSheet.create({
   },
   whitebg: {
     backgroundColor: 'white',
+    color: 'black',
   },
 });
 

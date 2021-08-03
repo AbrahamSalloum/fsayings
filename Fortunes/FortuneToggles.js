@@ -1,30 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  View,
-  FlatList,
-  Switch,
-  useColorScheme,
-  Button,
-  StyleSheet,
-} from 'react-native';
-import {HStack, Divider} from 'native-base';
+import {Text, View, FlatList, Switch, StyleSheet} from 'react-native';
+import {HStack, Divider, Button} from 'native-base';
 import {
   catlist,
   storeFortuneSelection,
   getFortuneSelection,
 } from './loadfortunes';
 
-const FortunToggles = () => {
+const FortunToggles = ({isforceddarkmode}) => {
   const [cattoggles, setCattoggles] = useState(false);
   const [all, setall] = useState(true);
-
-  const isDarkMode = useColorScheme() === 'dark';
-  const backgroundStyle = isDarkMode ? styles.blackbg : styles.whitebg;
+  const backgroundStyle = isforceddarkmode ? styles.blackbg : styles.whitebg;
 
   const renderListItem = ({item}) => {
     return (
-      <HStack alignItems="center" >
+      <HStack alignItems="center">
         <View style={{flex: 1}}>
           <Text fontSize="lg" style={backgroundStyle}>
             {item.catname}
@@ -77,7 +67,6 @@ const FortunToggles = () => {
       <HStack alignItems="center">
         <View style={{flex: 1}}>
           <Button
-            title="Toggle All"
             onPress={() => {
               const initcattoggles = {};
               for (let i of catlist) {
@@ -86,8 +75,9 @@ const FortunToggles = () => {
               setall(!all);
               setCattoggles(initcattoggles);
               storeFortuneSelection(initcattoggles);
-            }}
-          />
+            }}>
+            <Text style={{color: 'black'}}>TOGGLE ALL</Text>
+          </Button>
         </View>
       </HStack>
       <Divider my={2} />
@@ -113,6 +103,7 @@ const styles = StyleSheet.create({
   },
   whitebg: {
     backgroundColor: 'white',
+    color: 'black',
   },
 });
 

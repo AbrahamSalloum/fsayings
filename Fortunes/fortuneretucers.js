@@ -6,6 +6,7 @@ const initialState = {
   minlength: false,
   maxlength: false,
   args: '-a',
+  darkmode: false,
 };
 
 export const fortuneSlice = createSlice({
@@ -27,6 +28,9 @@ export const fortuneSlice = createSlice({
     setargs: (state, action) => {
       state.args = action.payload;
     },
+    toggledarkmode: (state, action) => {
+      state.darkmode = !state.darkmode;
+    },
   },
 });
 
@@ -36,11 +40,13 @@ export const {
   setminlength,
   setmaxlength,
   setargs,
+  toggledarkmode,
 } = fortuneSlice.actions;
 export const fortunefiles = state => state.fortunedata.fortunefiles;
 export const searchterm = state => state.fortunedata.searchterm;
 export const minlength = state => state.fortunedata.minlength;
 export const maxlength = state => state.fortunedata.maxlength;
 export const args = state => state.fortunedata.args;
+export const darkmode = state => state.fortunedata.darkmode;
 
 export default fortuneSlice.reducer;

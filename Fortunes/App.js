@@ -7,9 +7,8 @@ import {
   DrawerLayoutAndroid,
   View,
   FlatList,
-  Text,
 } from 'react-native';
-
+import {darkmode} from './fortuneretucers';
 import getfortune from './loadfortunes';
 import {NativeBaseProvider} from 'native-base';
 import Prompt from './Prompt';
@@ -22,7 +21,8 @@ import {store} from './store/store.js';
 const AppStart = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const drawer = useRef(null);
-  const backgroundStyle = isDarkMode ? styles.blackbg : styles.whitebg;
+  const isforceddarkmode = useSelector(darkmode);
+  const backgroundStyle = isDarkMode || isforceddarkmode ? styles.blackbg : styles.whitebg;
   const fortunes = useSelector(fortunefiles);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -30,21 +30,19 @@ const AppStart = () => {
     getfortune(200);
   }, []);
 
-  // while (!!fortunes === false) return <Text>OK</Text>;
-
   return (
     <DrawerLayoutAndroid
       ref={drawer}
       drawerWidth={300}
       drawerPosition={'left'}
-      renderNavigationView={() => <DrawerView drawer={drawer} />}>
+      renderNavigationView={() => <DrawerView drawer={drawer} isforceddarkmode={isforceddarkmode} />}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <SafeAreaView style={backgroundStyle}>
         <View>
-          <Prompt drawer={drawer} />
+          <Prompt drawer={drawer} isforceddarkmode={isforceddarkmode} />
           <FlatList
             data={fortunes}
-            renderItem={({item}) => <FortuneItem item={item} />}
+            renderItem={({item}) => <FortuneItem item={item} isforceddarkmode={isforceddarkmode} />}
             keyExtractor={(item, i) => i}
             refreshing={refreshing}
             onRefresh={() => {

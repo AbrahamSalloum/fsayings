@@ -1,13 +1,12 @@
 import React from 'react';
-import {Text, View, StyleSheet, useColorScheme} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
-import {IconButton, HamburgerIcon, HStack, Heading, Center} from 'native-base';
+import {IconButton, HamburgerIcon, HStack, Center} from 'native-base';
 import {args} from './fortuneretucers';
 
-const Prompt = ({drawer}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const TextColor = isDarkMode ? styles.greencolor : styles.blackcolor;
-  const Iconbg = isDarkMode ? styles.darkiconcolor : styles.lighticoncolor;
+const Prompt = ({drawer, isforceddarkmode}) => {
+  const TextColor = isforceddarkmode ? styles.greencolor : styles.blackcolor;
+  const Iconbg = isforceddarkmode ? styles.darkiconcolor : styles.lighticoncolor;
   const getargs = useSelector(args);
   return (
     <View border={1}>
