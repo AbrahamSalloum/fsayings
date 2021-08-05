@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   fortunefiles: false,
@@ -7,6 +7,7 @@ const initialState = {
   maxlength: false,
   args: '-a',
   darkmode: false,
+  singleeview: false,
 };
 
 export const fortuneSlice = createSlice({
@@ -31,6 +32,9 @@ export const fortuneSlice = createSlice({
     toggledarkmode: (state, action) => {
       state.darkmode = !state.darkmode;
     },
+    togglesingleview: (state, action) => {
+      state.singleeview = !state.singleeview;
+    },
   },
 });
 
@@ -41,12 +45,15 @@ export const {
   setmaxlength,
   setargs,
   toggledarkmode,
+  togglesingleview,
 } = fortuneSlice.actions;
+
 export const fortunefiles = state => state.fortunedata.fortunefiles;
 export const searchterm = state => state.fortunedata.searchterm;
 export const minlength = state => state.fortunedata.minlength;
 export const maxlength = state => state.fortunedata.maxlength;
 export const args = state => state.fortunedata.args;
 export const darkmode = state => state.fortunedata.darkmode;
+export const singleeview = state => state.fortunedata.singleeview;
 
 export default fortuneSlice.reducer;

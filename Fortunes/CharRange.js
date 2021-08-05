@@ -37,26 +37,21 @@ const CharRange = ({isforceddarkmode}) => {
   };
 
   return (
-    <View>
-      <Heading size="sm" style={backgroundStyle}>
-        Character Range:
-      </Heading>
+    <View style={backgroundStyle}>
+      <Heading size="sm" style={backgroundStyle}>Character Range:</Heading>
       <HStack>
-        <VStack style={{...backgroundStyle, flex: 1, marginRight: 3}}>
-          <Heading size="xs" style={backgroundStyle}>
-            Minimum
-          </Heading>
+        <VStack style={{...backgroundStyle, flex: 1}}>
+          <Heading size="xs" style={backgroundStyle}>Minimum</Heading>
           <Input
+            style={textcolor}
             keyboardType="numeric"
             onChange={s => handleChange(s, 'min')}
           />
         </VStack>
-        <VStack style={{...backgroundStyle, flex: 1, marginRight: 3}}>
-          <Heading size="xs" style={backgroundStyle}>
-            Maximum
-          </Heading>
+        <VStack style={{...backgroundStyle, flex: 1}}>
+          <Heading size="xs" style={backgroundStyle}>Maximum</Heading>
           <Input
-            style={{color: '#FFFFFF'}}
+            style={textcolor}
             keyboardType="numeric"
             onChange={s => handleChange(s, 'max')}
           />
@@ -82,10 +77,12 @@ const styles = StyleSheet.create({
   blackbg: {
     backgroundColor: '#332940',
     color: 'white',
+    marginRight: 3,
   },
   whitebg: {
     backgroundColor: 'white',
     color: 'black',
+    marginRight: 3,
   },
 });
 export default CharRange;

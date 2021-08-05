@@ -6,51 +6,55 @@ import {
   useColorScheme,
   DrawerLayoutAndroid,
   View,
-  FlatList,
+  Text,
 } from 'react-native';
-import {darkmode} from './fortuneretucers';
+import {darkmode, singleeview, fortunefiles} from './fortuneretucers';
 import getfortune from './loadfortunes';
 import {NativeBaseProvider} from 'native-base';
 import Prompt from './Prompt';
-import FortuneItem from './FortuneItem';
 import DrawerView from './DrawerView';
+import FortListView from './FortListView';
+import SingleView from './SingleView';
 import {Provider, useSelector} from 'react-redux';
-import {fortunefiles} from './fortuneretucers';
 import {store} from './store/store.js';
 
 const AppStart = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const drawer = useRef(null);
   const isforceddarkmode = useSelector(darkmode);
-  const backgroundStyle = isDarkMode || isforceddarkmode ? styles.blackbg : styles.whitebg;
+  const issingleview = useSelector(singleeview);
+  const backgroundStyle =
+    isDarkMode || isforceddarkmode ? styles.blackbg : styles.whitebg;
   const fortunes = useSelector(fortunefiles);
-  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     getfortune(200);
   }, []);
-
+  while (!!fortunes === false) {
+    return <Text>OK</Text>;
+  }
   return (
     <DrawerLayoutAndroid
       ref={drawer}
       drawerWidth={300}
       drawerPosition={'left'}
-      renderNavigationView={() => <DrawerView drawer={drawer} isforceddarkmode={isforceddarkmode} />}>
+      renderNavigationView={() => (
+        <DrawerView drawer={drawer} isforceddarkmode={isforceddarkmode} />
+      )}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <SafeAreaView style={backgroundStyle}>
-        <View>
-          <Prompt drawer={drawer} isforceddarkmode={isforceddarkmode} />
-          <FlatList
-            data={fortunes}
-            renderItem={({item}) => <FortuneItem item={item} isforceddarkmode={isforceddarkmode} />}
-            keyExtractor={(item, i) => i}
-            refreshing={refreshing}
-            onRefresh={() => {
-              setRefreshing(true);
-              getfortune(200);
-              setRefreshing(false);
-            }}
-          />
+      <SafeAreaView style={{...backgroundStyle, flex:1}}>
+      <View>
+      <Prompt drawer={drawer} isforceddarkmode={isforceddarkmode} />
+      </View>
+        <View style={{flex:1, flexDirection: "column"}}>
+          {issingleview ? (
+            <SingleView
+              fortunes={fortunes}
+              isforceddarkmode={isforceddarkmode}
+            />
+          ) : (
+            <FortListView fortunes={fortunes} />
+          )}
         </View>
       </SafeAreaView>
     </DrawerLayoutAndroid>

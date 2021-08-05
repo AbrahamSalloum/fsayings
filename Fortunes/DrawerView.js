@@ -11,7 +11,7 @@ const DrawerView = ({drawer, isforceddarkmode}) => {
   const isdarkmodeon = isDarkMode || isforceddarkmode 
   const backgroundStyle = isdarkmodeon ? styles.blackbg : styles.whitebg;
   return (
-    <View style={{...backgroundStyle, flex: 1, padding: 4}}>
+    <View style={backgroundStyle}>
       <Divider my={2} />
       <ToggleDarkMode isforceddarkmode={isdarkmodeon} />
       <Divider my={2} />
@@ -28,18 +28,26 @@ const styles = StyleSheet.create({
   whitecolor: {
     backgroundColor: '#332940',
     color: '#41FF00',
+    flex: 1,
+    padding: 4,
   },
   blackcolor: {
     backgroundColor: '#332940',
     color: 'black',
+    flex: 1,
+    padding: 4,
   },
   blackbg: {
     backgroundColor: '#332940',
     color: 'white',
+    flex: 1,
+    padding: 4,
   },
   whitebg: {
     backgroundColor: 'white',
     color: 'black',
+    flex: 1,
+    padding: 4,
   },
 });
 
