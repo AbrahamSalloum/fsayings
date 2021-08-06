@@ -3,8 +3,9 @@
 android app of: https://en.wikipedia.org/wiki/Fortune_(Unix)
 
 still work in progress
-Light/Dark mod available (toggled based on system setting: )
+Light/Dark mode available, variable font sizes, single or list view
 
-[screenshot 1](https://raw.githubusercontent.com/AbrahamSalloum/fsayings/main/screenshot/1.jpg)
-[screenshot 2](https://raw.githubusercontent.com/AbrahamSalloum/fsayings/main/screenshot/2.jpg)
+![Screenshot 1](/screenshot/settings.jpg?raw=true)
+![Screenshot 2](/screenshot/list.jpg?raw=true)
+![Screenshot 3](/screenshot/single.jpg?raw=true)
 
