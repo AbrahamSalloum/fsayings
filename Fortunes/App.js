@@ -42,11 +42,11 @@ const AppStart = () => {
         <DrawerView drawer={drawer} isforceddarkmode={isforceddarkmode} />
       )}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <SafeAreaView style={{...backgroundStyle, flex:1}}>
-      <View>
-      <Prompt drawer={drawer} isforceddarkmode={isforceddarkmode} />
-      </View>
-        <View style={{flex:1, flexDirection: "column"}}>
+      <SafeAreaView style={{...backgroundStyle, flex: 1}}>
+        <View>
+          <Prompt drawer={drawer} isforceddarkmode={isforceddarkmode} />
+        </View>
+        <View style={{flex: 1, flexDirection: 'column'}}>
           {issingleview ? (
             <SingleView
               fortunes={fortunes}

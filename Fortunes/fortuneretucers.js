@@ -8,6 +8,7 @@ const initialState = {
   args: '-a',
   darkmode: false,
   singleeview: false,
+  fontsize: 16,
 };
 
 export const fortuneSlice = createSlice({
@@ -35,6 +36,9 @@ export const fortuneSlice = createSlice({
     togglesingleview: (state, action) => {
       state.singleeview = !state.singleeview;
     },
+    setfontsize: (state, action) => {
+      state.fontsize = action.payload;
+    },
   },
 });
 
@@ -46,6 +50,7 @@ export const {
   setargs,
   toggledarkmode,
   togglesingleview,
+  setfontsize,
 } = fortuneSlice.actions;
 
 export const fortunefiles = state => state.fortunedata.fortunefiles;
@@ -55,5 +60,6 @@ export const maxlength = state => state.fortunedata.maxlength;
 export const args = state => state.fortunedata.args;
 export const darkmode = state => state.fortunedata.darkmode;
 export const singleeview = state => state.fortunedata.singleeview;
+export const fontsize = state => state.fortunedata.fontsize;
 
 export default fortuneSlice.reducer;

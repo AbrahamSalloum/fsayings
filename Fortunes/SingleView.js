@@ -3,18 +3,18 @@ import {Box, Button, HStack} from 'native-base';
 import {Text, StyleSheet, View} from 'react-native';
 import {stringToColour} from './loadfortunes';
 import getfortune from './loadfortunes';
-
+import {fontsize} from './fortuneretucers';
+import {useSelector} from 'react-redux';
 const ItemView = ({item, TextColor, index}) => {
+  const setfontsize = useSelector(fontsize);
   return (
     <View style={{flex: 1, flexGrow: 1, padding: 1}}>
       <Box border={1} style={{height: '100%'}}>
         <Box style={{backgroundColor: stringToColour(item.t)}}>
-          <Text>
-            {item.t} {index}
-          </Text>
+          <Text>{item.t}</Text>
         </Box>
         <Box px={4}>
-          <Text style={TextColor} selectable={true}>
+          <Text style={{...TextColor, fontSize: setfontsize}} selectable={true}>
             {item.f}
           </Text>
         </Box>

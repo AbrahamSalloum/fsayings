@@ -1,8 +1,16 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {Heading, HStack, IconButton, SunIcon, ArrowDownIcon} from 'native-base';
-import {toggledarkmode, togglesingleview} from './fortuneretucers';
+import {
+  Heading,
+  HStack,
+  IconButton,
+  SunIcon,
+  ArrowDownIcon,
+  Slider,
+} from 'native-base';
+import {toggledarkmode, togglesingleview, setfontsize} from './fortuneretucers';
 import {useDispatch} from 'react-redux';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ToggleDarkMode = ({isforceddarkmode}) => {
   const backgroundStyle = isforceddarkmode ? styles.blackbg : styles.whitebg;
@@ -28,6 +36,31 @@ const ToggleDarkMode = ({isforceddarkmode}) => {
             icon={<ArrowDownIcon />}
             onPress={() => dispatch(togglesingleview())}
           />
+        </View>
+      </HStack>
+      <HStack>
+        <View style={{marginRight: 3}}>
+          <MaterialCommunityIcons
+            name="format-size"
+            size={26}
+            style={backgroundStyle}
+          />
+        </View>
+        <View style={{flex: 1}}>
+          <Slider
+            defaultValue={16}
+            minValue={16}
+            maxValue={72}
+            accessibilityLabel="hello world"
+            onChange={v => {
+              dispatch(setfontsize(v));
+            }}
+            step={1}>
+            <Slider.Track>
+              <Slider.FilledTrack />
+            </Slider.Track>
+            <Slider.Thumb />
+          </Slider>
         </View>
       </HStack>
     </View>
