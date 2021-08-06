@@ -46,7 +46,7 @@ const ToggleDarkMode = ({isforceddarkmode}) => {
             style={backgroundStyle}
           />
         </View>
-        <View style={{flex: 1}}>
+        <View style={{marginRight: 3, flex: 1}}>
           <Slider
             defaultValue={16}
             minValue={16}
