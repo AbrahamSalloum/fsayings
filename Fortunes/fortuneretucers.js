@@ -1,4 +1,15 @@
 import {createSlice} from '@reduxjs/toolkit';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+export const getFortuneSelection = async () => {
+  try {
+    const v = await AsyncStorage.getItem('@darkmode');
+    let isTrueSet = (v === 'true');
+    return isTrueSet;
+  } catch (err) {
+    return err;
+  }
+};
 
 const initialState = {
   fortunefiles: false,
@@ -30,8 +41,13 @@ export const fortuneSlice = createSlice({
     setargs: (state, action) => {
       state.args = action.payload;
     },
+    setstoreddarkmode: (state, action) => {
+      setdarkmode(action.payload);
+      state.darkmode = action.payload;
+    },
     toggledarkmode: (state, action) => {
       state.darkmode = !state.darkmode;
+      setdarkmode(state.darkmode);
     },
     togglesingleview: (state, action) => {
       state.singleeview = !state.singleeview;
@@ -42,6 +58,14 @@ export const fortuneSlice = createSlice({
   },
 });
 
+const setdarkmode = async v => {
+  try {
+    await AsyncStorage.setItem('@darkmode', v.toString());
+  } catch (err) {
+    return err;
+  }
+};
+
 export const {
   setfortunefiles,
   setsearchterm,
@@ -51,6 +75,7 @@ export const {
   toggledarkmode,
   togglesingleview,
   setfontsize,
+  setstoreddarkmode,
 } = fortuneSlice.actions;
 
 export const fortunefiles = state => state.fortunedata.fortunefiles;

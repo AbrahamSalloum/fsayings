@@ -7,8 +7,8 @@ import {useSelector} from 'react-redux';
 
 const FortListView = ({fortunes}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const isforceddarkmode = useSelector(darkmode);
-  const backgroundStyle = isDarkMode || isforceddarkmode ? styles.blackbg : styles.whitebg;
+  const isforceddarkmode = useSelector(darkmode) || isforceddarkmode;
+  const backgroundStyle = isforceddarkmode ? styles.blackbg : styles.whitebg;
   const [refreshing, setRefreshing] = useState(false);
 
   return (

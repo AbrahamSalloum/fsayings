@@ -8,17 +8,24 @@ import {
   View,
   Text,
 } from 'react-native';
-import {darkmode, singleeview, fortunefiles} from './fortuneretucers';
+import {
+  darkmode,
+  singleeview,
+  fortunefiles,
+  getFortuneSelection,
+  setstoreddarkmode,
+} from './fortuneretucers';
 import getfortune from './loadfortunes';
 import {NativeBaseProvider} from 'native-base';
 import Prompt from './Prompt';
 import DrawerView from './DrawerView';
 import FortListView from './FortListView';
 import SingleView from './SingleView';
-import {Provider, useSelector} from 'react-redux';
+import {Provider, useSelector, useDispatch} from 'react-redux';
 import {store} from './store/store.js';
 
 const AppStart = () => {
+  const dispatch = useDispatch();
   const isDarkMode = useColorScheme() === 'dark';
   const drawer = useRef(null);
   const isforceddarkmode = useSelector(darkmode);
@@ -28,7 +35,12 @@ const AppStart = () => {
   const fortunes = useSelector(fortunefiles);
 
   useEffect(() => {
-    getfortune(200);
+    const x = async () => {
+      let xy = await getFortuneSelection();
+      dispatch(setstoreddarkmode(xy));
+      getfortune(200);
+    };
+    x();
   }, []);
   while (!!fortunes === false) {
     return <Text>OK</Text>;
