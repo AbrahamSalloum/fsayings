@@ -17,7 +17,7 @@ const FortunToggles = ({isforceddarkmode}) => {
       <HStack alignItems="center">
         <View style={{flex: 1}}>
           <Text fontSize="lg" style={backgroundStyle}>
-            {item.catname}
+            {item.displayname}
           </Text>
         </View>
         <View>

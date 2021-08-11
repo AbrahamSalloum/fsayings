@@ -1,0 +1,1 @@
+[{"k": "0", "t": "r.py", "f": "import re\nimport json\nimport os\n\nflist = os.listdir(\"./\")\n\nfor t in flist:\n    print(t)\n    ffile = open(\"./\"+t, \"r\", encoding='utf-8', errors=\"ignore\")\n    c = ffile.read()\n\n    fo = re.findall(r\"(.+?)(?=", "o": "n"}]
