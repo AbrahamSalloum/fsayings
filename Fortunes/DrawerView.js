@@ -8,7 +8,7 @@ import ToggleDarkMode from './ToggleDarkMode';
 
 const DrawerView = ({drawer, isforceddarkmode}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const isdarkmodeon = isDarkMode || isforceddarkmode 
+  const isdarkmodeon = isDarkMode || isforceddarkmode;
   const backgroundStyle = isdarkmodeon ? styles.blackbg : styles.whitebg;
   return (
     <View style={backgroundStyle}>

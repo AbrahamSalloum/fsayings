@@ -50,62 +50,95 @@ import cookie_off from '../jsonfortunes/off/cookie.json';
 import debian_off from '../jsonfortunes/off/debian.json';
 import definitions_off from '../jsonfortunes/off/definitions.json';
 import drugs_off from '../jsonfortunes/off/drugs.json';
+import ethnic_off from '../jsonfortunes/off/ethnic.json';
+import fortunes_off from '../jsonfortunes/off/fortunes.json';
+import hphobia_off from '../jsonfortunes/off/hphobia.json';
+import knghtbrd_off from '../jsonfortunes/off/knghtbrd.json';
+import limerick_off from '../jsonfortunes/off/limerick.json';
+import linux_off from '../jsonfortunes/off/linux.json';
+import misandry_off from '../jsonfortunes/off/misandry.json';
+import miscellaneous_off from '../jsonfortunes/off/miscellaneous.json';
+import misogyny_off from '../jsonfortunes/off/misogyny.json';
+import politics_off from '../jsonfortunes/off/politics.json';
+import racism_off from '../jsonfortunes/off/racism.json';
+import religion_off from '../jsonfortunes/off/religion.json';
+import riddles_off from '../jsonfortunes/off/riddles.json';
+import sex_off from '../jsonfortunes/off/sex.json';
+import songspoems_off from '../jsonfortunes/off/songs-poems.json';
+import vulgarity_off from '../jsonfortunes/off/vulgarity.json';
+import zippy_off from '../jsonfortunes/off/zippy.json';
 
 const catlist_off = [
-  {catname: 'art_off', displayname: 'Art (Off)'},
-  {catname: 'astrology_off', displayname: 'Astrology (Off)'},
-  {catname: 'atheism_off', displayname: 'Atheism (Off)'},
-  {catname: 'blackhumor_off', displayname: 'Black humor (Off)'},
-  {catname: 'cookie_off', displayname: 'Cookie (Off)'},
-  {catname: 'debian_off', displayname: 'Debain (Off)'},
-  {catname: 'definitions_off', displayname: 'Definitions (Off)'},
-  {catname: 'drugs_off', displayname: 'Drugs (Off)'},
+  {catname: 'art_off', displayname: 'Art (Off)', o: 'y'},
+  {catname: 'astrology_off', displayname: 'Astrology (Off)', o: 'y'},
+  {catname: 'atheism_off', displayname: 'Atheism (Off)', o: 'y'},
+  {catname: 'blackhumor_off', displayname: 'Black humor (Off)', o: 'y'},
+  {catname: 'cookie_off', displayname: 'Cookie (Off)', o: 'y'},
+  {catname: 'debian_off', displayname: 'Debain (Off)', o: 'y'},
+  {catname: 'definitions_off', displayname: 'Definitions (Off)', o: 'y'},
+  {catname: 'drugs_off', displayname: 'Drugs (Off)', o: 'y'},
+  {catname: 'ethnic_off', displayname: 'Ethnic (Off)', o: 'y'},
+  {catname: 'fortunes_off', displayname: 'Fortunes (Off)', o: 'y'},
+  {catname: 'hphobia_off', displayname: 'Hphobia (Off)', o: 'y'},
+  {catname: 'knghtbrd_off', displayname: 'Knghtbrd (Off)', o: 'y'},
+  {catname: 'limerick_off', displayname: 'Limerick (Off)', o: 'y'},
+  {catname: 'linux_off', displayname: 'Linux (Off)', o: 'y'},
+  {catname: 'misandry_off', displayname: 'Misandry (Off)', o: 'y'},
+  {catname: 'miscellaneous_off', displayname: 'Miscellaneous (Off)', o: 'y'},
+  {catname: 'misogyny_off', displayname: 'Misogyny (Off)', o: 'y'},
+  {catname: 'politics_off', displayname: 'Politics (Off)', o: 'y'},
+  {catname: 'racism_off', displayname: 'Racism (Off)', o: 'y'},
+  {catname: 'religion_off', displayname: 'Religion (Off)', o: 'y'},
+  {catname: 'riddles_off', displayname: 'Riddles (Off)', o: 'y'},
+  {catname: 'sex_off', displayname: 'Sex (Off)', o: 'y'},
+  {catname: 'songspoems_off', displayname: 'Songs Poems (Off)', o: 'y'},
+  {catname: 'vulgarity_off', displayname: 'Vulgarity (Off)', o: 'y'},
+  {catname: 'zippy_off', displayname: 'Zippy (Off)', o: 'y'},
 ];
 
-const catlist = [
-  {catname: 'art', displayname: 'Art'},
-  {catname: 'asciiart', displayname: 'ASCII Art'},
-  {catname: 'computers', displayname: 'Computers'},
-  {catname: 'cookie', displayname: 'Cookie'},
-  {catname: 'debian', displayname: 'Debian'},
-  {catname: 'definitions', displayname: 'Definitions'},
-  {catname: 'disclaimer', displayname: 'Disclaimer'},
-  {catname: 'drugs', displayname: 'Drugs'},
-  {catname: 'education', displayname: 'Education'},
-  {catname: 'ethnic', displayname: 'Ethnic'},
-  {catname: 'food', displayname: 'Food'},
-  {catname: 'fortunes', displayname: 'Fortunes'},
-  {catname: 'goedel', displayname: 'Goedel'},
+const catlist_clean = [
+  {catname: 'art', displayname: 'Art', o: 'n'},
+  {catname: 'asciiart', displayname: 'ASCII Art', o: 'n'},
+  {catname: 'computers', displayname: 'Computers', o: 'n'},
+  {catname: 'cookie', displayname: 'Cookie', o: 'n'},
+  {catname: 'debian', displayname: 'Debian', o: 'n'},
+  {catname: 'definitions', displayname: 'Definitions', o: 'n'},
+  {catname: 'disclaimer', displayname: 'Disclaimer', o: 'n'},
+  {catname: 'drugs', displayname: 'Drugs', o: 'n'},
+  {catname: 'education', displayname: 'Education', o: 'n'},
+  {catname: 'ethnic', displayname: 'Ethnic', o: 'n'},
+  {catname: 'food', displayname: 'Food', o: 'n'},
+  {catname: 'fortunes', displayname: 'Fortunes', o: 'n'},
+  {catname: 'goedel', displayname: 'Goedel', o: 'n'},
   {catname: 'humorists', displayname: 'Humorists'},
   {catname: 'kids', displayname: 'Kids'},
-  {catname: 'knghtbrd', displayname: 'knghtbrd'},
-  {catname: 'law', displayname: 'Law'},
-  {catname: 'linux', displayname: 'Linux'},
-  {catname: 'linuxcookie', displayname: 'Linux Cookie'},
-  {catname: 'literature', displayname: 'Literature'},
-  {catname: 'love', displayname: 'Love'},
-  {catname: 'magic', displayname: 'Magic'},
-  {catname: 'medicine', displayname: 'Medicine'},
-  {catname: 'menwomen', displayname: 'Men/Women'},
-  {catname: 'miscellaneous', displayname: 'Miscellaneous'},
-  {catname: 'news', displayname: 'News'},
-  {catname: 'paradoxum', displayname: 'Paradoxum'},
-  {catname: 'people', displayname: 'People'},
-  {catname: 'perl', displayname: 'Perl'},
-  {catname: 'pets', displayname: 'Pets'},
-  {catname: 'platitudes', displayname: 'Platitudes'},
-  {catname: 'politics', displayname: 'Politics'},
-  {catname: 'pratchett', displayname: 'pratchett'},
-  {catname: 'riddles', displayname: 'Riddles'},
-  {catname: 'science', displayname: 'Science'},
-  {catname: 'songspoems', displayname: 'Songs/Poems'},
-  {catname: 'sports', displayname: 'Sports'},
-  {catname: 'startrek', displayname: 'Star Trek'},
-  {catname: 'tao', displayname: 'Tao'},
-  {catname: 'translateme', displayname: 'Translate Me'},
-  {catname: 'wisdom', displayname: 'Wisdom'},
-  {catname: 'work', displayname: 'work'},
-  {catname: 'zippy', displayname: 'Zippy'},
+  {catname: 'knghtbrd', displayname: 'knghtbrd', o: 'n'},
+  {catname: 'law', displayname: 'Law', o: 'n'},
+  {catname: 'linux', displayname: 'Linux', o: 'n'},
+  {catname: 'linuxcookie', displayname: 'Linux Cookie', o: 'n'},
+  {catname: 'literature', displayname: 'Literature', o: 'n'},
+  {catname: 'love', displayname: 'Love', o: 'n'},
+  {catname: 'magic', displayname: 'Magic', o: 'n'},
+  {catname: 'medicine', displayname: 'Medicine', o: 'n'},
+  {catname: 'menwomen', displayname: 'Men/Women', o: 'n'},
+  {catname: 'miscellaneous', displayname: 'Miscellaneous', o: 'n'},
+  {catname: 'news', displayname: 'News', o: 'n'},
+  {catname: 'paradoxum', displayname: 'Paradoxum', o: 'n'},
+  {catname: 'people', displayname: 'People', o: 'n'},
+  {catname: 'pets', displayname: 'Pets', o: 'n'},
+  {catname: 'platitudes', displayname: 'Platitudes', o: 'n'},
+  {catname: 'politics', displayname: 'Politics', o: 'n'},
+  {catname: 'pratchett', displayname: 'pratchett', o: 'n'},
+  {catname: 'riddles', displayname: 'Riddles', o: 'n'},
+  {catname: 'science', displayname: 'Science', o: 'n'},
+  {catname: 'songspoems', displayname: 'Songs/Poems', o: 'n'},
+  {catname: 'sports', displayname: 'Sports', o: 'n'},
+  {catname: 'startrek', displayname: 'Star Trek', o: 'n'},
+  {catname: 'tao', displayname: 'Tao', o: 'n'},
+  {catname: 'translateme', displayname: 'Translate Me', o: 'n'},
+  {catname: 'wisdom', displayname: 'Wisdom', o: 'n'},
+  {catname: 'work', displayname: 'work', o: 'n'},
+  {catname: 'zippy', displayname: 'Zippy', o: 'n'},
 ];
 
 const fortunefiles_off = {
@@ -117,9 +150,26 @@ const fortunefiles_off = {
   debian_off,
   definitions_off,
   drugs_off,
+  ethnic_off,
+  fortunes_off,
+  hphobia_off,
+  knghtbrd_off,
+  limerick_off,
+  linux_off,
+  misandry_off,
+  miscellaneous_off,
+  misogyny_off,
+  politics_off,
+  racism_off,
+  religion_off,
+  riddles_off,
+  sex_off,
+  songspoems_off,
+  vulgarity_off,
+  zippy_off,
 };
 
-const fortunefiles = {
+const fortunefiles_clean = {
   art,
   asciiart,
   computers,
@@ -164,5 +214,14 @@ const fortunefiles = {
   zippy,
   work,
 };
+const fortunefiles = {...fortunefiles_clean, ...fortunefiles_off};
+const catlist = catlist_clean.concat(catlist_off);
 
-export {catlist, fortunefiles, catlist_off, fortunefiles_off};
+export {
+  catlist_clean,
+  fortunefiles_clean,
+  catlist_off,
+  fortunefiles_off,
+  fortunefiles,
+  catlist,
+};

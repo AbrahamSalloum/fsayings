@@ -11,12 +11,9 @@ import {
 import {toggledarkmode, togglesingleview, setfontsize} from './fortuneretucers';
 import {useDispatch} from 'react-redux';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ToggleDarkMode = ({isforceddarkmode}) => {
   const backgroundStyle = isforceddarkmode ? styles.blackbg : styles.whitebg;
-
-
 
   const dispatch = useDispatch();
 

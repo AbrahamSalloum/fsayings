@@ -1,4 +1,5 @@
 import React, {useRef, useEffect} from 'react';
+
 import {
   SafeAreaView,
   StatusBar,
@@ -8,6 +9,7 @@ import {
   View,
   Text,
 } from 'react-native';
+
 import {
   darkmode,
   singleeview,
@@ -15,6 +17,7 @@ import {
   getFortuneSelection,
   setstoreddarkmode,
 } from './fortuneretucers';
+
 import getfortune from './loadfortunes';
 import {NativeBaseProvider} from 'native-base';
 import Prompt from './Prompt';
@@ -43,7 +46,7 @@ const AppStart = () => {
     x();
   }, []);
   while (!!fortunes === false) {
-    return <Text>OK</Text>;
+    return <Text>...</Text>;
   }
   return (
     <DrawerLayoutAndroid

@@ -10,6 +10,7 @@ import {
 const FortunToggles = ({isforceddarkmode}) => {
   const [cattoggles, setCattoggles] = useState(false);
   const [all, setall] = useState(true);
+  const [allmature, setallmature] = useState(false);
   const backgroundStyle = isforceddarkmode ? styles.blackbg : styles.whitebg;
 
   const renderListItem = ({item}) => {
@@ -65,27 +66,49 @@ const FortunToggles = ({isforceddarkmode}) => {
   return (
     <View style={{flex: 1}}>
       <HStack alignItems="center">
-        <View style={{flex: 1}}>
-          <Button
-            onPress={() => {
-              const initcattoggles = {};
-              for (let i of catlist) {
-                initcattoggles[i.catname] = {...i, toggle: !all};
-              }
-              setall(!all);
-              setCattoggles(initcattoggles);
-              storeFortuneSelection(initcattoggles);
-            }}>
-            <Text style={{color: 'black'}}>TOGGLE ALL</Text>
-          </Button>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <View style={{flex: 1}}>
+            <Button
+              onPress={() => {
+                const initcattoggles = {};
+                for (let i of catlist) {
+                  initcattoggles[i.catname] = {...i, toggle: !all};
+                }
+                setall(!all);
+                setCattoggles(initcattoggles);
+                storeFortuneSelection(initcattoggles);
+              }}>
+              <Text style={{color: 'black'}}>TOGGLE ALL</Text>
+            </Button>
+          </View>
+          <View style={{flex: 1}}>
+            <Button
+              onPress={() => {
+                const initcattoggles = {};
+                for (let i of catlist) {
+                  if (i.o === 'y') {
+                    initcattoggles[i.catname] = {...i, toggle: !allmature};
+                  } else {
+                    initcattoggles[i.catname] = {...i, toggle: all};
+                  }
+                }
+                setallmature(!allmature);
+                setCattoggles(initcattoggles);
+                storeFortuneSelection(initcattoggles);
+              }}>
+              <Text style={{color: 'black'}}>TOGGLE NSFW</Text>
+            </Button>
+          </View>
         </View>
       </HStack>
       <Divider my={2} />
-      <FlatList
-        data={catlist}
-        renderItem={renderListItem}
-        keyExtractor={item => item.catname}
-      />
+      <View>
+        <FlatList
+          data={catlist}
+          renderItem={renderListItem}
+          keyExtractor={item => item.catname}
+        />
+      </View>
     </View>
   );
 };

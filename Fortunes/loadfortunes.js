@@ -1,7 +1,5 @@
 import {fortunefiles, catlist} from './datafiles.js';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import {setfortunefiles, setargs} from './fortuneretucers';
 import {store} from './store/store.js';
 
